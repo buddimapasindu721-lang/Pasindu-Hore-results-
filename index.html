@@ -3,169 +3,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PASINDU RACING</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PASINDU HORSE RACING RESULTS</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#050b14;color:#f4f6fa;font-family:Arial,sans-serif}
-header{padding:20px;background:#091523;border-bottom:1px solid #26384d;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-h1{margin:0;font-size:24px}h1 span{color:#ffc629}.sub{color:#9eafc2;font-size:12px;margin-top:6px}
-nav{display:flex;overflow:auto;background:#0a1420}
-nav button{min-width:125px;flex:1;padding:15px 8px;background:none;color:#ddd;border:0;border-bottom:3px solid transparent;font-weight:bold}
-nav button.active{color:#ffc629;border-color:#ffc629}
-main{max-width:1300px;margin:auto;padding:12px}
-.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#0c1725;padding:13px;border:1px solid #23364a;border-radius:10px}
-input,button{padding:11px;border-radius:7px;border:1px solid #33475c;background:#101f30;color:white}
-button{cursor:pointer;font-weight:bold}.gold{background:#ffc629;color:#111;border-color:#ffc629}
-input[type=date]{max-width:160px}.key{width:100%;display:flex;gap:8px}.key input{flex:1;min-width:0}
-.status{font-size:12px;color:#a8b8c9;margin-left:auto}
-h2{font-size:18px;margin:22px 3px 12px}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{border:1px solid #23415a;border-radius:10px;overflow:hidden;background:#0a1420;min-width:0}
-.cardhead{padding:13px;background:#10283b;font-weight:bold;line-height:1.5}
-.cardhead span{color:#ffc629}.cardbody{padding:8px}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{text-align:left;padding:9px 4px;border-bottom:1px solid #263545;overflow-wrap:anywhere}
-th{color:#9fb3c7;font-size:10px}td:first-child{color:#ffc629;font-weight:bold}
-td:nth-last-child(-n+2),th:nth-last-child(-n+2){text-align:right}
-.message{padding:24px 14px;text-align:center;border:1px dashed #33475c;border-radius:9px;color:#b4c2d0;line-height:1.7;overflow-wrap:anywhere}
-.note{font-size:12px;color:#92a5b9;line-height:1.6;margin-top:20px}
-@media(max-width:650px){.cards{grid-template-columns:1fr}h1{font-size:21px}.status{width:100%;margin:0}.tools{gap:7px}}
+*{box-sizing:border-box}
+body{margin:0;background:#0b1220;color:#fff;
+font-family:Arial,sans-serif}
+header{padding:20px 12px;text-align:center;
+background:#14233b;border-bottom:2px solid #e5b638}
+h1{font-size:23px;margin:0;color:#ffd65a}
+header p{color:#b9c7dc;font-size:12px}
+.status{padding:10px;text-align:center;color:#ffd65a;
+font-size:13px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);
+gap:5px;padding:8px}
+.tabs button{padding:12px 2px;border:1px solid #34445e;
+border-radius:7px;background:#18263d;color:white;
+font-size:12px;font-weight:bold}
+.tabs button.active{background:#e5b638;color:#111}
+main{padding:12px;max-width:800px;margin:auto}
+h2{font-size:19px}
+.card{background:#17243a;border:1px solid #30415c;
+border-radius:10px;padding:15px;margin:12px 0}
+.card p{color:#bdc9db;font-size:14px;line-height:1.6}
+a{color:#ffd65a}
+.links a{display:block;padding:12px;background:#17243a;
+border-radius:8px;margin:8px 0;text-decoration:none}
+.small{color:#9daec6;font-size:12px}
+button{cursor:pointer}
+footer{text-align:center;padding:25px;color:#8ea0bb;
+font-size:12px}
 </style>
 </head>
 <body>
 <header>
- <div><h1>🐎 PASINDU <span>RACING</span></h1><div class="sub">RACING RESULTS DASHBOARD</div></div>
- <div id="today" class="sub"></div>
+<h1>PASINDU RACING</h1>
+<p>HORSE • VIRTUAL HORSE • DOG • HARNESS</p>
 </header>
-<nav id="tabs">
- <button class="active" data-tab="latest">LATEST RESULTS</button>
- <button data-tab="horse">HORSE RACING</button>
- <button data-tab="virtual">VIRTUAL HORSE</button>
- <button data-tab="dog">VIRTUAL DOG</button>
- <button data-tab="harness">HARNESS</button>
+
+<div class="status" id="status">RESULTS FEED NOT CONNECTED</div>
+
+<nav class="tabs">
+<button class="active" data-type="horse">HORSE</button>
+<button data-type="virtual">VIRTUAL</button>
+<button data-type="dog">DOG</button>
+<button data-type="harness">HARNESS</button>
 </nav>
+
 <main>
- <div class="tools">
-  <label for="date">Date:</label><input type="date" id="date">
-  <button class="gold" id="todayBtn">TODAY</button>
-  <button id="yesterdayBtn">YESTERDAY</button>
-  <button id="refresh">⟳ REFRESH</button>
-  <div class="status" id="status">API key required</div>
-  <div class="key">
-   <input type="password" id="key" placeholder="Paste API key once">
-   <button class="gold" id="save">SAVE KEY</button>
-  </div>
- </div>
- <h2 id="heading">🏆 LATEST RESULTS — LAST 5 RACES</h2>
- <div id="results"><div class="message">Enter your API key and press SAVE KEY to load results.</div></div>
- <p class="note">Results and dividends appear only when provided by the data source. Virtual Horse, Dog and Harness require a provider that supplies those events. This page does not invent missing results.</p>
+<h2 id="heading">Horse Racing Results</h2>
+<p class="small">Latest 5 results • Live feed required</p>
+
+<div id="results"></div>
+
+<h2>Official Result Sources</h2>
+<div class="links">
+<a href="https://www.attheraces.com/results"
+target="_blank" rel="noopener">At The Races — Results ↗</a>
+<a href="https://www.tabtouch.com.au/"
+target="_blank" rel="noopener">TabTouch — Racing ↗</a>
+</div>
+
+<div class="card">
+<strong>Live data connection</strong>
+<p id="notice">
+This website is ready for a results feed.
+Real race results will appear when a compatible,
+authorized data source is connected.
+</p>
+<button onclick="location.reload()"
+style="padding:10px;border:0;border-radius:6px">
+Refresh Website
+</button>
+</div>
 </main>
+
+<footer>
+PASINDU HORSE RACING RESULTS<br>
+Personal racing results dashboard
+</footer>
+
 <script>
-const API="https://api.apihorseracing.com/v1";
-const $=id=>document.getElementById(id);
-const fmt=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-let tab="latest",busy=false;
-$("date").value=fmt(new Date());
-$("today").textContent=new Date().toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
-try{$("key").value=localStorage.getItem("ahr_key")||""}catch(e){}
-
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function get(o,keys,fallback="-"){for(const k of keys){if(o&&o[k]!=null&&o[k]!=="")return o[k]}return fallback}
-function status(t){$("status").textContent=t}
-function show(html){$("results").innerHTML=html}
-function dateToday(){return fmt(new Date())}
-
-function flatten(body){
- let d=body?.data;
- if(Array.isArray(d))return d;
- if(!d)return [];
- if(Array.isArray(d.races))return d.races;
- if(Array.isArray(d.results))return d.results;
- if(Array.isArray(d.meetings))return d.meetings.flatMap(m=>
-   (m.races||[]).map(r=>({...r,course:r.course||m.course,region:r.region||m.region}))
- );
- if(typeof d==="object")return [];
- return [];
-}
-async function request(path){
- const key=$("key").value.trim();
- if(!key)throw Error("Enter your API key first.");
- const res=await fetch(API+path,{headers:{"X-API-Key":key,"Accept":"application/json"}});
- let body;try{body=await res.json()}catch(e){throw Error("API response could not be read")}
- if(!res.ok||body.error){
-   const err=body.error||{};
-   throw Error(err.message||err.code||("API error "+res.status));
- }
- return body;
-}
-function raceCard(r,i){
- const runners=Array.isArray(r.runners)?r.runners:
-   Array.isArray(r.result?.runners)?r.result.runners:[];
- const sorted=[...runners].sort((a,b)=>
-   Number(get(a,["position","place","finish_position"],999))-
-   Number(get(b,["position","place","finish_position"],999))
- );
- let rows=sorted.slice(0,8).map((x,j)=>{
-  let p=get(x,["position","place","finish_position","rank"],j+1);
-  let horse=get(x,["horse_name","horse","runner","name"],"Runner");
-  if(typeof horse==="object")horse=get(horse,["name","horse_name"],"Runner");
-  return `<tr><td>${esc(p)}</td><td>${esc(get(x,["number","cloth_number","saddle_number"]))}</td><td>${esc(horse)}</td><td>${esc(get(x,["sp","starting_price","win_odds","price"]))}</td><td>${esc(get(x,["place_odds","place_price"]))}</td></tr>`;
- }).join("");
- if(!rows)rows='<tr><td colspan="5">Finishing positions not supplied in this response.</td></tr>';
- const dividends=Array.isArray(r.dividends)?r.dividends:[];
- const divHtml=dividends.length?dividends.map(x=>
- `<span>${esc(get(x,["pool","type","bet_type","name"],"Dividend"))}: <b>${esc(get(x,["amount","dividend","payout","value"]))}</b></span>`
- ).join(" · "):"Dividends not supplied";
- return `<article class="card"><div class="cardhead">
- <span>R${esc(get(r,["race_number","number"],i+1))}</span> · ${esc(get(r,["course","course_name","venue","meeting_name"],"Race course"))}
- <div class="sub">${esc(get(r,["race_name","name","title"],"Race results"))} · ${esc(get(r,["off_time","time","start_time"],""))}</div>
- <div class="sub">${esc(get(r,["region","country","jurisdiction"],""))}</div></div>
- <div class="cardbody"><table><thead><tr><th>POS</th><th>NO</th><th>HORSE</th><th>WIN</th><th>PLACE</th></tr></thead><tbody>${rows}</tbody></table>
- <p class="sub">${divHtml}</p></div></article>`;
-}
-async function load(){
- if(busy)return;
- if(["virtual","dog","harness"].includes(tab)){
-  $("heading").textContent=({virtual:"⚡ VIRTUAL HORSE",dog:"🐕 VIRTUAL DOG",harness:"🏁 HARNESS RACING"})[tab];
-  show('<div class="message">This API does not confirm data for this racing type. A compatible data feed is needed to show real results here.</div>');
-  status("Provider required");return;
- }
- busy=true;status("Loading…");
- $("heading").textContent=tab==="latest"?"🏆 LATEST RESULTS — LAST 5 RACES":"♞ HORSE RACING RESULTS";
- try{
-  const day=$("date").value||dateToday();
-  const endpoint=tab==="latest"&&day===dateToday()?"/results/latest?limit=5":"/results/"+encodeURIComponent(day);
-  const body=await request(endpoint);
-  let races=flatten(body);
-  if(tab==="latest")races=races.slice(0,5);
-  if(!races.length){
-   show('<div class="message">API returned no races for this date. Check the API plan, response and date.</div>');
-   status("No results returned");return;
-  }
-  show(`<div class="cards">${races.map(raceCard).join("")}</div>`);
-  status(`${races.length} race(s) · Updated ${esc(body.meta?.data_as_of||"")}`);
- }catch(e){
-  show(`<div class="message">Could not load results.<br><br>${esc(e.message)}<br><br>Check API access and connection.</div>`);
-  status("Loading failed");
- }finally{busy=false}
-}
-$("save").onclick=()=>{
- const k=$("key").value.trim();
- if(!k){status("Enter API key");return}
- try{localStorage.setItem("ahr_key",k)}catch(e){}
- load();
+const types = {
+ horse: "Horse Racing Results",
+ virtual: "Virtual Horse Results",
+ dog: "Dog Racing Results",
+ harness: "Harness Racing Results"
 };
-$("refresh").onclick=load;
-$("date").onchange=load;
-$("todayBtn").onclick=()=>{$("date").value=dateToday();load()};
-$("yesterdayBtn").onclick=()=>{let d=new Date();d.setDate(d.getDate()-1);$("date").value=fmt(d);load()};
-$("tabs").onclick=e=>{
- const b=e.target.closest("button[data-tab]");if(!b)return;
- tab=b.dataset.tab;
- document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("active",x===b));
- load();
-};
-if($("key").value)load();
+
+const results = document.getElementById("results");
+const heading = document.getElementById("heading");
+const status = document.getElementById("status");
+const notice = document.getElementById("notice");
+
+function showTab(type) {
+ heading.textContent = types[type];
+ results.replaceChildren();
+
+ document.querySelectorAll(".tabs button").forEach(btn => {
+   btn.classList.toggle("active", btn.dataset.type === type);
+ });
+
+ const card = document.createElement("div");
+ card.className = "card";
+
+ const title = document.createElement("strong");
+ title.textContent = "No live results available";
+
+ const detail = document.createElement("p");
+ detail.textContent =
+   "Connect a compatible results feed to display the latest five races. No result data has been invented.";
+
+ card.append(title, detail);
+ results.append(card);
+
+ status.textContent = "LIVE FEED NOT CONNECTED";
+ notice.textContent =
+   "Selected: " + types[type] +
+   ". A compatible data source is needed for automatic results.";
+}
+
+document.querySelectorAll(".tabs button").forEach(btn => {
+ btn.addEventListener("click", () => showTab(btn.dataset.type));
+});
+
+showTab("horse");
 </script>
 </body>
 </html>
