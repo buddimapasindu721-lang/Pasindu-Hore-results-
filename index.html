@@ -4,270 +4,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pasindu Racing Results</title>
+<title>PASINDU RACING | Results</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1220;--card:#17243a;--gold:#ffd166;--muted:#a8bad2}
+:root{color-scheme:dark;--bg:#050b13;--panel:#0a1421;--line:#1c3045;--gold:#ffc629;--muted:#a7b6c7}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
-header{background:#14243c;padding:18px 14px;border-bottom:2px solid var(--gold)}
-h1{font-size:23px;margin:0 0 5px}
-header p{color:var(--muted);margin:0;font-size:12px}
-main{max-width:900px;margin:auto;padding:12px}
-.controls,.card{background:var(--card);padding:13px;border-radius:12px;margin-bottom:12px}
-input,button{font:inherit;border-radius:8px;padding:11px;border:1px solid #40516b}
-input{background:#0b1628;color:white;max-width:100%}
-button{background:#243852;color:white;cursor:pointer}
-button.active,.primary{background:var(--gold);color:#101827;font-weight:bold}
-.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-bottom:12px}
-.tabs button{font-size:13px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.row input{flex:1;min-width:130px}
-.muted{color:var(--muted);font-size:13px}
-.status{padding:10px 0;color:var(--gold);font-size:13px}
-.race{background:var(--card);border-radius:12px;margin:12px 0;overflow:hidden}
-.racehead{padding:13px;background:#20334f}
-.racehead h3{margin:0 0 6px;font-size:16px}
-.racebody{padding:12px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-td,th{text-align:left;padding:9px 5px;border-bottom:1px solid #34435a}
-th{color:var(--gold)}
-.pill{display:inline-block;background:#31455f;border-radius:20px;padding:5px 8px;font-size:11px}
-footer{text-align:center;color:var(--muted);padding:20px;font-size:12px}
-[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:#f5f7fb;font-family:Arial,Helvetica,sans-serif}
+header{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#07101b}
+.brand{font-size:24px;font-weight:900}.brand span{color:var(--gold)}
+.subtitle{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:1px}
+.today{color:var(--gold);font-weight:bold;font-size:13px}
+nav{display:flex;overflow-x:auto;background:#08121e;border-bottom:1px solid var(--line)}
+nav button{flex:1;min-width:125px;padding:15px 10px;background:transparent;border:0;border-bottom:3px solid transparent;color:#d8e1ec;font-weight:bold;cursor:pointer}
+nav button.active{color:var(--gold);border-bottom-color:var(--gold)}
+main{padding:12px;max-width:1500px;margin:auto}
+.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.toolbar label{font-size:12px;color:var(--muted);font-weight:bold}
+input,button{font:inherit}
+input[type=date],input[type=password]{background:#08111d;color:white;border:1px solid #33475d;border-radius:7px;padding:10px;min-height:40px}
+.btn{padding:10px 13px;border:1px solid #33475d;border-radius:7px;background:#132237;color:white;font-weight:bold;cursor:pointer}
+.btn.gold{background:var(--gold);color:#111;border-color:var(--gold)}
+.keybox{display:flex;gap:8px;flex-wrap:wrap;width:100%;margin-top:3px}
+.keybox input{flex:1;min-width:180px}
+.status{font-size:12px;color:var(--muted);margin-left:auto}
+h2{font-size:19px;margin:20px 4px 12px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.race{border:1px solid #245071;border-radius:11px;overflow:hidden;background:linear-gradient(145deg,#0c1c2c,#050a11);min-width:0}
+.race:nth-child(5n+2){border-color:#9d2028;background:linear-gradient(145deg,#310b10,#09080b)}
+.race:nth-child(5n+3){border-color:#a76712;background:linear-gradient(145deg,#2a1908,#090a0e)}
+.race:nth-child(5n+4){border-color:#247844;background:linear-gradient(145deg,#082315,#070c0b)}
+.race:nth-child(5n+5){border-color:#8e36a2;background:linear-gradient(145deg,#260b31,#090910)}
+.racehead{padding:11px 12px;background:#10263a;font-weight:bold;line-height:1.5}
+.race:nth-child(5n+2) .racehead{background:#4a1015}
+.race:nth-child(5n+3) .racehead{background:#3d250b}
+.race:nth-child(5n+4) .racehead{background:#10331d}
+.race:nth-child(5n+5) .racehead{background:#381044}
+.racehead .raceinfo{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.racehead .course{color:var(--gold)}
+.race-sub{font-size:12px;color:#d1d9e4;margin-top:5px;font-weight:normal}
+.racebody{padding:9px 10px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{color:#c7d1df;font-size:10px;text-align:right;padding:6px 3px;border-bottom:1px solid #26384a}
+th:first-child,th:nth-child(2),th:nth-child(3){text-align:left}
+td{padding:7px 3px;border-bottom:1px solid #1b2b3b}
+td:nth-child(1){color:var(--gold);font-weight:bold;width:35px}
+td:nth-child(2){width:28px;color:#d4deea}
+td:nth-child(4),td:nth-child(5){text-align:right;white-space:nowrap}
+.runner{font-weight:bold;overflow-wrap:anywhere}
+.dividends{display:flex;gap:10px;flex-wrap:wrap;padding:10px;background:#070c13;font-size:12px}
+.dividends b{color:#7fe58c}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin:15px 3px}
+.message{padding:22px 15px;text-align:center;border:1px dashed #33475d;border-radius:10px;color:var(--muted);line-height:1.7}
+.error{color:#ff9c9c}
+.hidden{display:none}
+@media(max-width:700px){.cards{grid-template-columns:1fr}header{align-items:flex-start}.brand{font-size:21px}.status{width:100%;margin-left:0}main{padding:8px}nav button{min-width:115px;font-size:12px}}
 </style>
 </head>
 <body>
 <header>
-  <h1>🏆 PASINDU RACING</h1>
-  <p>HORSE RACING · RESULTS · RACE ARCHIVE</p>
+  <div>
+    <div class="brand">🐎 PASINDU <span>RACING</span></div>
+    <div class="subtitle">HORSE RACING RESULTS</div>
+  </div>
+  <div class="today" id="headerDate"></div>
 </header>
 
+<nav id="tabs">
+  <button class="active" data-tab="latest">◷ LATEST RESULTS</button>
+  <button data-tab="horse">♞ HORSE RACING</button>
+  <button data-tab="virtual">⚡ VIRTUAL HORSE</button>
+  <button data-tab="dog">🐕 VIRTUAL DOG</button>
+  <button data-tab="harness">♧ HARNESS RACING</button>
+</nav>
+
 <main>
-  <section class="controls">
-    <label for="day">📅 Select Race Date</label>
-    <div class="row" style="margin-top:8px">
-      <input type="date" id="day">
-      <button id="loadDay" class="primary">Load Results</button>
+  <section class="toolbar">
+    <label for="raceDate">SELECT DATE</label>
+    <input id="raceDate" type="date">
+    <button class="btn gold" id="todayBtn">TODAY</button>
+    <button class="btn" id="yesterdayBtn">YESTERDAY</button>
+    <button class="btn" id="refreshBtn">⟳ REFRESH</button>
+    <div class="status" id="status">Enter your API key to load results</div>
+    <div class="keybox">
+      <input id="apiKey" type="password" placeholder="Paste your API key here" autocomplete="off">
+      <button class="btn gold" id="loadBtn">USE KEY</button>
+      <button class="btn" id="forgetBtn">CLEAR KEY</button>
     </div>
-    <div class="row" style="margin-top:10px">
-      <button id="today">Today</button>
-      <button id="yesterday">Yesterday</button>
-      <button id="refresh">↻ Refresh</button>
-    </div>
-    <p class="muted">Available dates depend on your API plan.</p>
   </section>
 
-  <section class="controls">
-    <label for="apiKey">API Key (keep private)</label>
-    <div class="row" style="margin-top:8px">
-      <input id="apiKey" type="password" placeholder="Paste your API key">
-      <button id="saveKey" class="primary">Use Key</button>
-    </div>
-    <p class="muted">Key is kept only in this browser. Do not publish it in source code.</p>
-  </section>
+  <h2 id="sectionTitle">🏆 LATEST RESULTS — LAST 5 RACES</h2>
+  <div id="content">
+    <div class="message">Enter your API key above and press USE KEY.<br>Real results will load from the racing data provider.</div>
+  </div>
 
-  <nav class="tabs" aria-label="Racing categories">
-    <button class="active" data-tab="horse">🐎 Horse</button>
-    <button data-tab="virtualHorse">⚡ Virtual Horse</button>
-    <button data-tab="dog">🐕 Virtual Dog</button>
-    <button data-tab="harness">🏇 Harness</button>
-  </nav>
-
-  <section class="controls">
-    <div class="row" style="justify-content:space-between">
-      <strong id="sectionTitle">Latest Horse Results</strong>
-      <span class="pill" id="count">0 races</span>
-    </div>
-    <div id="status" class="status" role="status">Enter your API key to begin.</div>
-    <div id="results"></div>
-  </section>
-  <footer>Results are supplied by the connected data provider.
-    Missing dividends are not estimated.</footer>
+  <p class="note">
+    Note: Results, odds and dividends are displayed only when supplied by the API.
+    Virtual Horse, Virtual Dog and Harness data require a provider that supports those race types.
+    This website does not create or predict results.
+  </p>
 </main>
 
 <script>
 const API = "https://api.apihorseracing.com/v1";
+let currentTab = "latest";
+let currentData = [];
+let busy = false;
+
 const $ = id => document.getElementById(id);
-let category = "horse";
-let races = [];
-let lastMode = "latest";
 
-const todayISO = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-};
-$("day").value = todayISO();
+function localDate(d = new Date()) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${day}`;
+}
+function showHeaderDate() {
+  $("headerDate").textContent = new Date().toLocaleDateString("en-GB", {
+    weekday:"long", day:"numeric", month:"long", year:"numeric"
+  });
+}
+showHeaderDate();
+$("raceDate").value = localDate();
 
-function safe(v) {
-  return String(v ?? "—").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+function getKey() {
+  return $("apiKey").value.trim();
+}
+function setStatus(text, isError=false) {
+  $("status").textContent = text;
+  $("status").classList.toggle("error", isError);
+}
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
   }[c]));
 }
-function key() {
-  return $("apiKey").value.trim() || sessionStorage.getItem("ahr_key") || "";
-}
-function message(text) { $("status").textContent = text; }
-
-async function request(path) {
-  const k = key();
-  if (!k) throw Error("Enter your API key first.");
-  const res = await fetch(API + path, {
-    headers: {"X-API-Key": k, "Accept":"application/json"}
+async function apiGet(path) {
+  const key = getKey();
+  if (!key) throw new Error("Please enter your API key first.");
+  const response = await fetch(API + path, {
+    headers: {"X-API-Key":key, "Accept":"application/json"}
   });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw Error(body.message || body.error ||
-    `API request failed (${res.status}). Check key and plan.`);
-  return body.data ?? body;
-}
+  let body;
+  try { body = await response.json(); }
+  catch { throw new Error("API returned an unreadable response."); }
 
-function listFrom(data) {
-  if (Array.isArray(data)) return data;
-  if (!data || typeof data !== "object") return [];
-  for (const name of ["results","races","meetings","items"]) {
-    if (Array.isArray(data[name])) return data[name];
+  if (!response.ok) {
+    const msg = body?.error?.message || body?.message || body?.error?.code;
+    if (response.status === 401) throw new Error("API key rejected. Check your key.");
+    if (response.status === 403) throw new Error(msg || "Your API plan cannot access this date or endpoint.");
+    if (response.status === 429) throw new Error("API request limit reached. Try again later.");
+    throw new Error(msg || `API error ${response.status}`);
   }
-  if (Array.isArray(data.data)) return data.data;
-  return [];
+  if (body?.error) throw new Error(body.error.message || body.error.code || "API error");
+  return body;
 }
-function flatten(data) {
-  const out = [];
-  for (const item of listFrom(data)) {
-    if (Array.isArray(item.races)) {
-      item.races.forEach(r => out.push({
-        ...r, course:r.course || item.course || item.name,
-        date:r.date || item.date
-      }));
-    } else out.push(item);
+function unwrap(body) {
+  const d = body?.data;
+  if (Array.isArray(d)) return d;
+  if (Array.isArray(d?.results)) return d.results;
+  if (Array.isArray(d?.races)) return d.races;
+  if (Array.isArray(d?.meetings)) return d.meetings.flatMap(m =>
+    (m.races || []).map(r => ({...r, course:r.course || m.course}))
+  );
+  if (Array.isArray(body?.results)) return body.results;
+  return d ? [d] : [];
+}
+function val(obj, keys, fallback="") {
+  for (const k of keys) {
+    if (obj && obj[k] !== undefined && obj[k] !== null && obj[k] !== "") return obj[k];
   }
-  return out;
+  return fallback;
 }
-
-async function loadResults(mode="date") {
-  lastMode = mode;
-  $("results").innerHTML = "";
-  $("count").textContent = "Loading…";
-  message("Loading real results…");
+function numberOdds(v) {
+  if (v === undefined || v === null || v === "") return "-";
+  if (typeof v === "number") return v.toFixed(2);
+  return String(v);
+}
+function findRunners(detail) {
+  const candidates = [
+    detail?.data?.runners, detail?.data?.result?.runners,
+    detail?.data?.results, detail?.data?.finishers,
+    detail?.runners, detail?.result?.runners, detail?.finishers
+  ];
+  return candidates.find(Array.isArray) || [];
+}
+function findDividends(detail) {
+  const d = detail?.data?.dividends || detail?.data?.result?.dividends ||
+            detail?.dividends || detail?.data?.payouts || [];
+  return Array.isArray(d) ? d : [];
+}
+async function enrichRace(race) {
+  if (!race?.race_id) return {race, runners:[], dividends:[]};
   try {
-    let data;
-    if (mode === "latest") {
-      data = await request("/results/latest?limit=5");
-    } else {
-      data = await request("/results/" + encodeURIComponent($("day").value));
-    }
-    races = flatten(data);
-    races.sort((a,b) =>
-      String(b.date || "").localeCompare(String(a.date || "")) ||
-      String(b.off_time || b.time || "").localeCompare(String(a.off_time || a.time || ""))
-    );
-    render();
-    message(races.length
-      ? "Results received from API. Missing fields depend on source coverage."
-      : "No settled results returned for this date.");
-  } catch(e) {
-    message(e.message + " If the request is blocked, the provider may not allow direct browser access. A secure server connection will be needed.");
-    $("count").textContent = "Unavailable";
+    const [result, div] = await Promise.allSettled([
+      apiGet("/races/" + encodeURIComponent(race.race_id) + "/result"),
+      apiGet("/races/" + encodeURIComponent(race.race_id) + "/dividends")
+    ]);
+    const resultBody = result.status === "fulfilled" ? result.value : null;
+    const divBody = div.status === "fulfilled" ? div.value : null;
+    return {
+      race,
+      runners:findRunners(resultBody),
+      dividends:findDividends(divBody || resultBody)
+    };
+  } catch {
+    return {race, runners:[], dividends:[]};
   }
 }
+function renderRace(item, index) {
+  const race = item.race || item;
+  const course = val(race, ["course","course_name","venue"], "Race course");
+  const name = val(race, ["name","race_name","title"], "Race result");
+  const raceNo = val(race, ["race_number","number","race"], index+1);
+  const time = val(race, ["off_time","time","start_time"], "");
+  const distance = val(race, ["distance"], "");
+  const date = val(race, ["date"], "");
+  const runners = item.runners || [];
+  const divs = item.dividends || [];
 
-function render() {
-  const shown = category === "horse" ? races.slice(0, lastMode==="latest" ? 5 : 100) : [];
-  $("count").textContent = category === "horse" ? `${shown.length} races` : "Source needed";
-  $("sectionTitle").textContent = ({
-    horse:"Latest Horse Results",
-    virtualHorse:"Virtual Horse Results",
-    dog:"Virtual Dog Results",
-    harness:"Harness Racing Results"
-  })[category];
-  if (category !== "horse") {
-    $("results").innerHTML = `<div class="card">
-      <h3>${safe($("sectionTitle").textContent)}</h3>
-      <p class="muted">The connected API documents conventional horse racing results.
-      A compatible virtual racing / greyhound / harness data provider must be connected
-      before real results for this category can be displayed.</p>
-    </div>`;
+  let rows = "";
+  if (runners.length) {
+    const sorted = [...runners].sort((a,b) =>
+      Number(val(a,["position","place","finish_position"],999)) -
+      Number(val(b,["position","place","finish_position"],999))
+    );
+    rows = sorted.slice(0,8).map((r,i) => {
+      const pos = val(r,["position","place","finish_position","rank"],i+1);
+      const num = val(r,["number","saddle_number","cloth_number"],"-");
+      const runner = val(r,["horse","horse_name","runner","name"],"Runner");
+      const win = val(r,["sp","starting_price","win_odds","price"],"-");
+      const place = val(r,["place_odds","place_price"],"-");
+      return `<tr>
+        <td>${escapeHTML(pos)}${Number(pos)===1?"st":Number(pos)===2?"nd":Number(pos)===3?"rd":""}</td>
+        <td>${escapeHTML(num)}</td>
+        <td class="runner">${escapeHTML(typeof runner==="object" ? val(r,["horse_name","name"],"Runner") : runner)}</td>
+        <td>${escapeHTML(numberOdds(win))}</td>
+        <td>${escapeHTML(numberOdds(place))}</td>
+      </tr>`;
+    }).join("");
+  } else {
+    rows = `<tr><td colspan="5" style="text-align:center;color:#a7b6c7;padding:16px">
+      ${race.result_available === false ? "Result not published yet." :
+      "Finishing order / odds not supplied by this response."}
+    </td></tr>`;
+  }
+
+  let dividendHtml = "";
+  if (divs.length) {
+    dividendHtml = `<div class="dividends">${
+      divs.map(d => `<span>${escapeHTML(val(d,["pool","type","bet_type","name"],"Dividend"))}:
+      <b>${escapeHTML(val(d,["amount","dividend","payout","value"],"-"))}</b></span>`).join("")
+    }</div>`;
+  } else {
+    dividendHtml = `<div class="dividends"><span>Dividends: <b>Not supplied</b></span></div>`;
+  }
+
+  return `<article class="race">
+    <div class="racehead">
+      <div class="raceinfo">
+        <span><span class="course">R${escapeHTML(raceNo)}</span> ${escapeHTML(course)}</span>
+        <span>${escapeHTML(time)}</span>
+      </div>
+      <div class="race-sub">${escapeHTML(name)}${distance ? " · "+escapeHTML(distance):""}</div>
+      ${date ? `<div class="race-sub">${escapeHTML(date)}</div>`:""}
+    </div>
+    <div class="racebody">
+      <table>
+        <thead><tr><th>POS</th><th>NO.</th><th>RUNNER</th><th>WIN</th><th>PLACE</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    ${dividendHtml}
+  </article>`;
+}
+function setContent(html) {
+  $("content").innerHTML = html;
+}
+function setTitle() {
+  const titles = {
+    latest:"🏆 LATEST RESULTS — LAST 5 RACES",
+    horse:"♞ HORSE RACING RESULTS",
+    virtual:"⚡ VIRTUAL HORSE",
+    dog:"🐕 VIRTUAL DOG RESULTS",
+    harness:"♧ HARNESS RACING RESULTS"
+  };
+  $("sectionTitle").textContent = titles[currentTab] || titles.latest;
+}
+async function loadResults() {
+  if (busy) return;
+  if (!getKey()) {
+    setStatus("Enter API key", true);
+    setContent('<div class="message">Enter your API key and press USE KEY.</div>');
     return;
   }
-  $("results").innerHTML = shown.map((r,i) => `
-    <article class="race">
-      <div class="racehead">
-        <h3>${safe(r.course || r.course_name || "Racecourse")} · R${safe(r.race_number || r.number || i+1)}</h3>
-        <div class="muted">${safe(r.date || $("day").value)} · ${safe(r.off_time || r.time || "Time unavailable")}</div>
-        <div class="muted">${safe(r.name || r.race_name || "")}</div>
-      </div>
-      <div class="racebody">
-        <div class="row">
-          <span class="pill">${safe(r.country || r.region || "Horse Racing")}</span>
-          <span class="pill">${safe(r.runners ?? "—")} runners</span>
-          <span class="pill">${r.result_available ? "Result published" : "Result status unavailable"}</span>
-        </div>
-        <p class="muted">Winning time: ${safe(r.winning_time || "Not supplied")}</p>
-        <button data-race="${safe(r.race_id || "")}" class="details">View full result & payouts</button>
-        <div class="detailsBox" hidden></div>
-      </div>
-    </article>
-  `).join("");
-  document.querySelectorAll(".details").forEach(btn => {
-    btn.addEventListener("click", () => showDetails(btn));
-  });
-}
 
-async function showDetails(btn) {
-  const id = btn.dataset.race;
-  const box = btn.nextElementSibling;
-  if (!id) { box.hidden = false; box.textContent = "Race ID is not available in this response."; return; }
-  box.hidden = false;
-  box.innerHTML = '<p class="muted">Loading result and dividends…</p>';
+  if (["virtual","dog","harness"].includes(currentTab)) {
+    setStatus("Provider needed");
+    setContent(`<div class="message">
+      <strong>${escapeHTML($("sectionTitle").textContent)}</strong><br><br>
+      The connected API documents standard horse-racing results.
+      It does not confirm this tab's virtual / dog / harness data.<br><br>
+      To show real results here, a matching data provider or API endpoint is required.
+    </div>`);
+    return;
+  }
+
+  busy = true;
+  $("loadBtn").disabled = true;
+  setStatus("Loading results…");
+  setTitle();
+
   try {
-    const [result, dividends] = await Promise.allSettled([
-      request("/races/" + encodeURIComponent(id) + "/result"),
-      request("/races/" + encodeURIComponent(id) + "/dividends")
-    ]);
-    const a = result.status === "fulfilled" ? result.value : null;
-    const b = dividends.status === "fulfilled" ? dividends.value : null;
-    const runners = listFrom(a);
-    let html = "";
-    if (runners.length) {
-      html += "<table><thead><tr><th>Pos</th><th>Horse</th><th>Odds</th></tr></thead><tbody>";
-      html += runners.map(x => `<tr>
-        <td>${safe(x.position ?? x.finish_position ?? x.place)}</td>
-        <td>${safe(x.horse ?? x.horse_name ?? x.name)}</td>
-        <td>${safe(x.sp ?? x.starting_price ?? x.odds)}</td>
-      </tr>`).join("");
-      html += "</tbody></table>";
+    const date = $("raceDate").value || localDate();
+    let body;
+    if (currentTab === "latest" && date === localDate()) {
+      body = await apiGet("/results/latest?limit=5");
     } else {
-      html += `<p class="muted">${a ? "Finishing order not present in the expected response format." : "Finishing order unavailable on this plan."}</p>`;
+      body = await apiGet("/results/" + encodeURIComponent(date));
     }
-    html += "<h4>Dividends / Payouts</h4>";
-    if (b) html += `<pre style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px">${safe(JSON.stringify(b,null,2))}</pre>`;
-    else html += '<p class="muted">Payout data not available for this race or plan.</p>';
-    box.innerHTML = html;
-  } catch(e) {
-    box.textContent = e.message;
+
+    let races = unwrap(body).filter(r => r && typeof r === "object");
+    if (currentTab === "latest") races = races.slice(0,5);
+
+    if (!races.length) {
+      setContent('<div class="message">No results were returned for this date. Check the date, API plan window, and provider response.</div>');
+      setStatus("0 results");
+      return;
+    }
+
+    setStatus(`Loading details for ${races.length} race(s)…`);
+    const enriched = await Promise.all(races.slice(0,5).map(enrichRace));
+    currentData = enriched;
+    setContent(`<div class="cards">${enriched.map(renderRace).join("")}</div>`);
+    const meta = body?.meta?.data_as_of;
+    setStatus(`${enriched.length} races${meta ? " · Updated "+meta : " · Data loaded"}`);
+  } catch (err) {
+    setStatus("Could not load data", true);
+    setContent(`<div class="message error"><strong>Results could not be loaded.</strong><br><br>
+      ${escapeHTML(err.message || "Unknown error")}<br><br>
+      Check your API key, internet connection, and plan access.
+    </div>`);
+  } finally {
+    busy = false;
+    $("loadBtn").disabled = false;
   }
 }
 
-$("saveKey").onclick = () => {
-  const k = $("apiKey").value.trim();
-  if (!k) { message("Paste your API key first."); return; }
-  sessionStorage.setItem("ahr_key", k);
-  message("Key kept for this browser session. Testing latest results…");
-  loadResults("latest");
-};
-$("loadDay").onclick = () => loadResults("date");
-$("today").onclick = () => { $("day").value=todayISO(); loadResults("date"); };
-$("yesterday").onclick = () => {
-  const d = new Date(); d.setDate(d.getDate()-1);
-  $("day").value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-  loadResults("date");
-};
-$("refresh").onclick = () => loadResults(lastMode);
-document.querySelectorAll("[data-tab]").forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll("[data-tab]").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    category=btn.dataset.tab;
-    render();
-  };
+$("tabs").addEventListener("click", e => {
+  const button = e.target.closest("button[data-tab]");
+  if (!button) return;
+  currentTab = button.dataset.tab;
+  document.querySelectorAll("#tabs button").forEach(b =>
+    b.classList.toggle("active", b === button)
+  );
+  setTitle();
+  loadResults();
+});
+$("loadBtn").addEventListener("click", loadResults);
+$("refreshBtn").addEventListener("click", loadResults);
+$("raceDate").addEventListener("change", loadResults);
+$("todayBtn").addEventListener("click", () => {
+  $("raceDate").value = localDate();
+  loadResults();
+});
+$("yesterdayBtn").addEventListener("click", () => {
+  const d = new Date();
+  d.setDate(d.getDate()-1);
+  $("raceDate").value = localDate(d);
+  loadResults();
+});
+$("forgetBtn").addEventListener("click", () => {
+  $("apiKey").value = "";
+  currentData = [];
+  setStatus("API key cleared");
+  setContent('<div class="message">API key cleared from this page.</div>');
 });
 </script>
 </body>
